@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "profile": "smoke",
+  "models": 21,
+  "split_schemes": 2,
+  "shap_permutations": 2,
+  "code_cells": 54,
+  "all_code_cells_executed": true,
+  "saved_errors": 0,
+  "elapsed_s": 381.5,
+  "full_search_rerun": false,
+  "isolated_notebook_only_input": true,
+  "release_notebook": "bend_angle_ml.ipynb",
+  "release_outputs_cleared": true,
+  "release_source_matches_executed_copy": true,
+  "original_plot_blocks_unchanged": 28,
+  "input_csv_and_npz_byte_identical_to_project": true,
+  "visual_output_check": [
+    "percentage confusion composite",
+    "GNB SHAP"
+  ],
+  "notebook_sha256": "91984719538cd29e207a21a3f2967ad8f9ac96c0b5538f35a03caff1b837f4a3",
+  "html_preview_code_cells": 54,
+  "html_preview_images": 5
+}

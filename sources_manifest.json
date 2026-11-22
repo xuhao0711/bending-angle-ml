@@ -1,0 +1,82 @@
+{
+  "source_notebook_sha256": "a7f1540215b56a374c108d65523e2c73bcea8727e29e1760e1614e113cc5165a",
+  "source_notebook": "弯曲角度五分类_全模型SHAP_已执行核查.ipynb",
+  "notebook": "bend_angle_ml.ipynb",
+  "input_sha256": {
+    "peak_windows_13points.csv": "aadbf83a3405c136902231eb6d14232e80bb7677fea2ad14d034f8851333a81a",
+    "angle_waveforms.npz": "9546f8fcf49853498bf4760a1c0f2593c10e9a3090ae160d780e77de1cc8db1b"
+  },
+  "templates": {
+    "shap": {
+      "source": "期刊复现：多分类XGBoost模型解释SHAP柱状图与蜂群图组合绘制.html",
+      "sha256": "1cca34306423bbf43f731d9eb6f88e3b3be4dd18cffc4f00f128e9ceacd5e347"
+    },
+    "network": {
+      "source": "期刊复现：告别枯燥！多分类SHAP网络图读懂变量重要性与交互作用如何共同影响模型预测.html",
+      "sha256": "3cda1903035cfad4f6b569bbdf8b9ce808cfabeb9fc00ffaaafbe351be9b5199"
+    },
+    "taylor": {
+      "source": "模型之间的泰勒图比较：从模型指标计算到局部放大 inset 优化.html",
+      "sha256": "9e65a3659c991510262a42e7683381499197562ccaddcf25641fcf9e579fa3a5"
+    },
+    "metrics": {
+      "source": "分类.ipynb",
+      "sha256": "767f065cb4181ff74503ba8f1dd8639ec2c05d913fe0aea2e1c066d5a4e9fa94"
+    },
+    "optuna": {
+      "source": "基于Optuna的机器学习超参数调优与自定义可视化分析.ipynb",
+      "sha256": "dcee70e4f3608c6c785b78ba457a80bf454cb55185ccc69cff41291eba90a2ba"
+    },
+    "roc": {
+      "source": "多分类如何绘制ROC曲线--宏平均ROC曲线.ipynb",
+      "sha256": "b53e8dad1a032fe255ef7e6f5a474a3c199ec0152bbc26debbc5e3765e26bdda"
+    },
+    "cvroc": {
+      "source": "期刊配图：交叉验证与ROC曲线相结合的带置信区间可视化.ipynb",
+      "sha256": "72631a0f830bb1db56235753d827bb4e74ffdc78c541722ca06815e370d88ca7"
+    }
+  },
+  "adaptations": [
+    {
+      "reason": "Pass the percentage colorbar formatter to the original plotting cell",
+      "before": "env=runner.env();env.update(ytest=test.y_true.to_numpy(),y_pred=test.y_pred.to_numpy())",
+      "after": "env=runner.env();env.update(ytest=test.y_true.to_numpy(),y_pred=test.y_pred.to_numpy(),PercentFormatter=PercentFormatter)"
+    },
+    {
+      "reason": "Use the row-normalized percentage confusion matrices requested on 2026-11-22",
+      "before": "runner.execute('roc',4,env,{'conf_matrix = confusion_matrix(ytest, y_pred)':\n                    'conf_matrix = pd.DataFrame(confusion_matrix(ytest, y_pred, labels=range(5)), index=[30,45,60,90,120], columns=[30,45,60,90,120])'})",
+      "after": "runner.execute('roc',4,env,{'conf_matrix = confusion_matrix(ytest, y_pred)': 'conf_counts = confusion_matrix(ytest, y_pred, labels=range(5))\\nrow_totals = conf_counts.sum(axis=1, keepdims=True)\\nconf_matrix = pd.DataFrame(np.divide(conf_counts, row_totals, out=np.zeros_like(conf_counts, dtype=float), where=row_totals != 0), index=[30,45,60,90,120], columns=[30,45,60,90,120])', \"fmt='d', cmap='YlGnBu', cbar_kws={'shrink': 0.75})\": \"fmt='.1%', cmap='YlGnBu', vmin=0, vmax=1, cbar_kws={'shrink': 0.75, 'format': PercentFormatter(xmax=1, decimals=0)})\"})"
+    }
+  ],
+  "font_files_included": false,
+  "original_template_block_hashes": {
+    "ORIGINAL_PLOT_SOURCES['roc']['blocks'][4]": "fda67bde93c45f49803aff6f508687313a4962d771e6f691bc154ecb6cf5bab3",
+    "ORIGINAL_PLOT_SOURCES['roc']['blocks'][6]": "70e8f241889f57929ef3cc4b7fe2bf483c855c8e1f23af639fdd6ac11635058c",
+    "ORIGINAL_PLOT_SOURCES['cvroc']['blocks'][2]": "718f1e65d1f60c8bf5329c842e489656a61f62f66deb02b7be5e2ce103741b8c",
+    "ORIGINAL_PLOT_SOURCES['cvroc']['blocks'][3]": "315e8e3d916ebe96d75145649cbe9006256183b15c7fbc5e9aa87af030b27df2",
+    "ORIGINAL_PLOT_SOURCES['cvroc']['blocks'][8]": "00a5d4d4168847c3401fbc4c5a390d411c9767b1db4bf5f8dde8a66609dc89d1",
+    "ORIGINAL_PLOT_SOURCES['metrics']['blocks'][2]": "879dd271929c68005a69d4c339f9d6dd5b84401586fc70e1bdcab93e8f14c0b5",
+    "ORIGINAL_PLOT_SOURCES['metrics']['blocks'][3]": "8f299c597158859ec84b2d37cc91403db51213391040087b6b1d088e958eb9bc",
+    "ORIGINAL_PLOT_SOURCES['optuna']['blocks'][3]": "2d94c285a0357b3b8f4ab348fd8b68584eec235d24b8de56650ff01846ac9b2b",
+    "ORIGINAL_PLOT_SOURCES['optuna']['blocks'][5]": "475eb8c93e7fd73d8762e770bef1883d2fa12a9faf363502fe322f6e3c529caa",
+    "ORIGINAL_PLOT_SOURCES['optuna']['blocks'][7]": "0304a18828432109cf0f67d23ddf99121cc0b3751baffa8b1170199eafeb0c9b",
+    "ORIGINAL_PLOT_SOURCES['optuna']['blocks'][8]": "e1f82695a43817c9345329a6b97ef2b7411383b760c825803c90901bad820c96",
+    "ORIGINAL_PLOT_SOURCES['taylor']['blocks'][7]": "679841841e48463ef5e2cde5a3a917eee51056723d4f25826c1ee15b465f1cff",
+    "ORIGINAL_PLOT_SOURCES['taylor']['blocks'][8]": "5b65bebb29441b352fb2460b9cd39f51dd3a8a21dd789b55585924d87926e94a",
+    "ORIGINAL_PLOT_SOURCES['taylor']['blocks'][10]": "ed564ddfa6eeab0268623c5d0c0363d21ae3f3f11e064a4c04f1cfc1f3e2c0e8",
+    "ORIGINAL_PLOT_SOURCES['taylor']['blocks'][11]": "83ff3bc2e253aa4bf745ca15c7981df197d6f334f112a1fc1edd78faee0a6b01",
+    "ORIGINAL_PLOT_SOURCES['taylor']['blocks'][13]": "1ff90370ad0db8fd6a9a623045e768c879c1564143ff1920f47c636b18083746",
+    "ORIGINAL_PLOT_SOURCES['shap']['blocks'][10]": "2a9ec5af13059c5d3c97073a2fdd74d276506f6dd66e9c9494b2b76969a0b597",
+    "ORIGINAL_PLOT_SOURCES['shap']['blocks'][14]": "8fcef4494038b2180cba7b09926ea7e892b3f9a39a84966503d54cbe6d2fef49",
+    "ORIGINAL_PLOT_SOURCES['network']['blocks'][12]": "1b83a8a26dc26d26306311a8d956e27c09897a3cba95b471e521b142cb121826",
+    "ORIGINAL_PLOT_SOURCES['network']['blocks'][16]": "34c473da9f756f1e34e23c19a0c80092c179e369c25a2939d09de637cc69ef14",
+    "ORIGINAL_PLOT_SOURCES['network']['blocks'][21]": "dfbf5936fb85e612d7f2d9913e21520ded634da6992c75f66718062c14d5ad45",
+    "ORIGINAL_PLOT_SOURCES['network']['blocks'][25]": "ed15ccc22e2a6afd7744a0f95bacbff4ca21f5a002f33f1f8f6fa250ce2e7357",
+    "ORIGINAL_PLOT_SOURCES['network']['blocks'][26]": "bab4e903bf798e895e5d8557efb47d258cbccae30ef25fa3c3f504684647ff8e",
+    "ORIGINAL_PLOT_SOURCES['network']['blocks'][27]": "bfebafaf6782411081c13af3ce2d711629faef4f7e622af0b3a66de0f8b39910",
+    "ORIGINAL_PLOT_SOURCES['network']['blocks'][29]": "80d7aae3e91a59cf1721d8c7dfe3a2194ff3a49872595324d10fd5054c67a83f",
+    "ORIGINAL_PLOT_SOURCES['network']['blocks'][31]": "a6e6bca17d852cd63ea12241f0cf6c04ef5272ad94ed11efc0b6289a57873c39",
+    "ORIGINAL_PLOT_SOURCES['network']['blocks'][33]": "294551f5f97f61a3904ddd7dab90a9b11b6b5bbeb30c7aafd57a55c57eee8e8f",
+    "ORIGINAL_PLOT_SOURCES['network']['blocks'][35]": "77f5f74d5b32b4a9340d7fc03548ee3c02dc6d3359683f29c3d67584d3eeaf35"
+  }
+}
