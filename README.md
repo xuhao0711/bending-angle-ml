@@ -1,3 +1,5 @@
+[简体中文](README.md) | [English](README.en.md)
+
 # 弯曲角度分类：单文件训练与绘图Notebook
 
 `bend_angle_ml.ipynb`包含21个分类模型、Optuna调参、嵌套交叉验证、完整指标、原模板绘图和全模型SHAP。代码和输入数据都在Notebook中，不依赖原项目目录或其他本地Python脚本。
